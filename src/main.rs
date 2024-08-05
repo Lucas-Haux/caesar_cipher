@@ -51,6 +51,7 @@ fn main() {
     //Encrept the message
     for char in unencrepted_message.chars() {
         //Find if the character is lower/upercase or a number
+        let mut symbol = false;
         let mut max_size = b'z';
         let mut size_length: u8 = 0;
         match char as u8 {
@@ -67,6 +68,7 @@ fn main() {
                 size_length = 10; 
             },
             _ => {
+                symbol = true;
             }
         }
         //Shift the character by the shift amount
@@ -88,7 +90,11 @@ fn main() {
                 break;
             };
         };
-        encrepted_message.push(ascii_value as char);
+        if symbol == false {
+            encrepted_message.push(ascii_value as char);
+        } else {
+            encrepted_message.push(char);
+        }
     } 
     println!("Encrepted Message: {}", encrepted_message);
 }
